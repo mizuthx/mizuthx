@@ -1,0 +1,16 @@
+html{
+    background-color: rgb(79, 51, 126);
+}
+
+
+.title{
+    display: flex;
+    align-content: center;
+    
+
+
+    font-family: "Tagesschrift", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color:azure
+}
