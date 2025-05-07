@@ -3,37 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrir múltiples pestañas</title>
-</head>
-<body>
-    <h1>Abrir múltiples pestañas</h1>
-    <p>Este botón abrirá varias pestañas con el enlace:</p>
-    <p><code>https://shrimp.mizuthx.dev/</code></p>
-    
-    <button onclick="">Abrir pestañas</button>
-    
-    <div class="note">
-        <p>Nota: Tu navegador podría bloquear ventanas emergentes no solicitadas.</p>
-        <p>Es posible que necesites permitir ventanas emergentes para este sitio.</p>
-    </div>
-
+    <title>Apertura Automática de Pestañas</title>
     <script>
+        // Configuración ajustable
+        const config = {
+            url: 'https://shrimp.mizuthx.dev/',
+            cantidad: 50,                // Número de pestañas a abrir
+            delayInicial: 100,        // Retraso inicial antes de comenzar (ms)
+            delayEntreAperturas: 150,  // Retraso entre cada apertura (ms)
+            variacionDelay: 50         // Variación aleatoria del retraso (ms)
+        };
+
         function abrirPestanas() {
-            const url = 'https://shrimp.mizuthx.dev/';
-            const cantidad = 100; // Cambia este número según cuántas pestañas quieras abrir
+            let abiertas = 0;
             
-            // Abrir múltiples pestañas
-            for (let i = 0; i < cantidad; i++) {
-                // Agregamos un pequeño retraso aleatorio para evitar bloqueos del navegador
-                setTimeout(() => {
-                    window.open(url, '_blank');
-                }, i * 100 + Math.random() * 50);
+            function abrirUna() {
+                const ventana = window.open(config.url, '_blank');
+                if (ventana) abiertas++;
+                
+                // Mostrar progreso en la consola
+                console.log(`Pestañas abiertas: ${abiertas}/${config.cantidad}`);
+                
+                // Continuar con la siguiente si no hemos terminado
+                if (abiertas < config.cantidad) {
+                    const delay = config.delayEntreAperturas + 
+                                (Math.random() * config.variacionDelay * 2 - config.variacionDelay);
+                    setTimeout(abrirUna, Math.max(50, delay)); // Mínimo 50ms de delay
+                }
             }
             
-            // Mostrar mensaje de confirmación
-            alert(`Se intentaron abrir ${cantidad} pestañas con ${url}`);
+            // Iniciar el proceso después del delay inicial
+            setTimeout(abrirUna, config.delayInicial);
         }
-        abrirPestanas()
+
+        // Esperar a que la página esté completamente cargada
+        if (window.addEventListener) {
+            window.addEventListener('load', abrirPestanas, false);
+        } else if (window.attachEvent) {
+            window.attachEvent('onload', abrirPestanas);
+        }
     </script>
+</head>
+<body>
+    <h1 style="text-align: center; font-family: Arial, sans-serif;">
+        Redireccionando a múltiples pestañas...
+    </h1>
+    <p style="text-align: center; color: #666;">
+        Por favor espera mientras se abren las pestañas.<br>
+        Si no se abren, verifica que tu navegador permita ventanas emergentes para este sitio.
+    </p>
 </body>
 </html>
