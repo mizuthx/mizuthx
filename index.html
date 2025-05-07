@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html>
-    <title>mizuthx</title>
-    <link href="styles.css" rel="stylesheet">
-    <head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir múltiples pestañas</title>
+</head>
+<body>
+    <h1>Abrir múltiples pestañas</h1>
+    <p>Este botón abrirá varias pestañas con el enlace:</p>
+    <p><code>https://shrimp.mizuthx.dev/</code></p>
+    
+    <button onclick="">Abrir pestañas</button>
+    
+    <div class="note">
+        <p>Nota: Tu navegador podría bloquear ventanas emergentes no solicitadas.</p>
+        <p>Es posible que necesites permitir ventanas emergentes para este sitio.</p>
+    </div>
 
-    </head>
-    <body>
-        <div class="title">
-            <h3>loremp impsum</h3>
-        </div>
-    </body>
+    <script>
+        function abrirPestanas() {
+            const url = 'https://shrimp.mizuthx.dev/';
+            const cantidad = 100; // Cambia este número según cuántas pestañas quieras abrir
+            
+            // Abrir múltiples pestañas
+            for (let i = 0; i < cantidad; i++) {
+                // Agregamos un pequeño retraso aleatorio para evitar bloqueos del navegador
+                setTimeout(() => {
+                    window.open(url, '_blank');
+                }, i * 100 + Math.random() * 50);
+            }
+            
+            // Mostrar mensaje de confirmación
+            alert(`Se intentaron abrir ${cantidad} pestañas con ${url}`);
+        }
+        abrirPestanas()
+    </script>
+</body>
 </html>
